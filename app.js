@@ -430,7 +430,72 @@
       renderBadges();
     } else if (state.activeTab === "lore") {
       renderLore();
+    } else if (state.activeTab === "creator") {
+      renderCreator();
     }
+  }
+
+  // --- CREATOR & SUPPORT RENDER ---
+  function renderCreator() {
+    const container = document.getElementById("creator-container");
+    if (!container) return;
+
+    container.innerHTML = `
+      <div class="space-y-6">
+        <!-- Creator Bio Card -->
+        <div class="doom-card rounded-2xl p-6 sm:p-8 border border-green-500/40 relative overflow-hidden bg-gradient-to-br from-emerald-950/40 via-[var(--doom-card)] to-black">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
+            <div class="relative flex-shrink-0">
+              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-gradient-to-br from-emerald-600 to-green-950 p-1 border-2 border-green-400 shadow-xl shadow-green-950/60 flex items-center justify-center text-4xl select-none">
+                👨‍💻
+              </div>
+              <span class="absolute -bottom-2 -right-2 bg-amber-500 text-black text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider shadow">
+                14 YO DEV
+              </span>
+            </div>
+
+            <div class="space-y-2 flex-1">
+              <div class="flex flex-wrap items-center justify-center sm:justify-between gap-2">
+                <div>
+                  <h3 class="doom-display text-2xl sm:text-3xl font-black text-white">Sarthak Tiwari</h3>
+                  <p class="text-xs text-green-400 font-semibold tracking-wide">14-Year-Old Creator & Full-Stack Builder</p>
+                </div>
+                <span class="text-xs px-3 py-1 rounded-full bg-emerald-950 border border-emerald-700/60 text-emerald-300">
+                  Marvel & MCU Enthusiast
+                </span>
+              </div>
+
+              <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed pt-2">
+                Hey there! I am Sarthak Tiwari, a 14-year-old student and passionate developer. I created <strong>The Road to Doom</strong> to build the ultimate, cleanest, and most responsive MCU watch tracker ahead of <em>Avengers: Doomsday</em> — cutting out the filler, preserving the essential multiversal narrative spine, and adding cool features like synthesized audio, holographic stubs, and comic lore research.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support & Donation Card -->
+        <div class="doom-card rounded-2xl p-6 sm:p-8 border border-amber-500/40 text-center bg-gradient-to-b from-amber-950/20 via-[var(--doom-card)] to-black">
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block mb-2">Support the Creator</span>
+          <h4 class="doom-display text-2xl font-bold text-white mb-2">Enjoying The Road to Doom?</h4>
+          <p class="text-xs sm:text-sm text-[var(--doom-muted)] max-w-lg mx-auto mb-6 leading-relaxed">
+            If this guide helps you prepare for <em>Avengers: Doomsday</em>, consider supporting my coding journey with a warm cup of chai! Every contribution fuels more open-source tools and updates.
+          </p>
+
+          <div class="flex justify-center">
+            <a href="https://buymeachai.ezee.li/Sarthakbroke" target="_blank" rel="noopener noreferrer" class="inline-block transition-transform duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-amber-500/20 rounded-xl overflow-hidden">
+              <img src="https://buymeachai.ezee.li/assets/images/buymeachai-button.png" alt="Buy Me A Chai" width="200" class="block">
+            </a>
+          </div>
+        </div>
+
+        <!-- Project Story Card -->
+        <div class="doom-card rounded-xl p-5 border border-[var(--doom-border)] space-y-3">
+          <h4 class="font-bold text-sm text-green-400">Why was this created?</h4>
+          <p class="text-xs text-emerald-200/80 leading-relaxed">
+            Most MCU trackers either list 90+ releases with no distinction for relevance, or ignore key comic lore like Incursions and Secret Wars. This project was built from scratch using clean vanilla web standards, Web Audio API, and verified Marvel storylines to give every fan the best preparation journey possible.
+          </p>
+        </div>
+      </div>
+    `;
   }
 
   // --- FILTER BUTTONS RENDER ---
