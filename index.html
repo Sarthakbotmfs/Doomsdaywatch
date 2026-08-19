@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+  <title>The Road to Doom | Ultimate MCU & Multiverse Preparation Guide</title>
+  <meta name="description" content="Your curated preparation guide for Avengers: Doomsday — complete chronological MCU watch order, essential multiverse series, and comic lore."/>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            doom: {
+              bg: '#060a08',
+              dark: '#090e0b',
+              card: '#0e1612',
+              border: '#1a2c22',
+              green: '#10b981',
+              bright: '#4ade80',
+              gold: '#f59e0b',
+              muted: '#7d9688'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="min-h-screen text-[var(--foreground)] antialiased relative selection:bg-green-600 selection:text-white pb-20">
+
+  <!-- Ambient Glow & Vignette -->
+  <div aria-hidden="true" class="doom-ambient"></div>
+  <div aria-hidden="true" class="doom-vignette"></div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- Global Toast Notification -->
+  <div id="global-toast" class="fixed bottom-6 right-6 z-50 bg-emerald-950/95 border border-green-500/80 text-green-300 px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold tracking-wide transition-all duration-300 opacity-0 translate-y-4 pointer-events-none flex items-center gap-2">
+    <span>👑</span>
+    <span>Notification message</span>
+  </div>
+
+  <!-- Master Container -->
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+
+    <!-- Header Section -->
+    <header class="text-center mb-8">
+      <!-- Doom Mask Emblem / Interactive Logo -->
+      <div class="flex justify-center mb-4">
+        <div 
+          id="doom-logo-container"
+          onclick="window.handleDoomMaskClick()" 
+          title="Click the Doom Mask (Secret Easter Egg!)"
+          class="cursor-pointer select-none transition-transform duration-300 hover:scale-105 active:scale-95 group relative">
+          
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-b from-emerald-900/40 to-black border-2 border-green-500/50 flex items-center justify-center shadow-xl shadow-green-950/50 group-hover:border-green-400 group-hover:shadow-green-500/30">
+            <!-- Stylized Doctor Doom Mask SVG -->
+            <svg class="w-12 h-12 sm:w-14 sm:h-14 text-green-400 drop-shadow-[0_0_12px_rgba(74,222,128,0.6)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 10h.01M15 10h.01M9 14h6M9 17h6M12 6v4"/>
+            </svg>
+          </div>
+          <span class="text-[9px] uppercase tracking-widest text-emerald-400/60 block mt-1 font-mono">LATVERIA • EARTH-616</span>
+        </div>
+      </div>
+
+      <h1 class="doom-title text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-green-400 to-amber-300 doom-text-glow">
+        THE ROAD TO DOOM
+      </h1>
+      <p class="text-xs sm:text-sm text-[var(--doom-muted)] mt-2 font-medium tracking-wide">
+        The Definitive MCU & Multiverse Preparation Guide for <span class="text-green-400 font-semibold">Avengers: Doomsday</span>
+      </p>
+
+      <!-- Quick Control Buttons -->
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <button 
+          type="button" 
+          id="toggle-sound-btn" 
+          onclick="window.toggleSound()"
+          class="inline-flex items-center px-3 py-1.5 rounded-lg border border-[var(--doom-border)] bg-[var(--doom-card)] hover:border-green-500/60 transition-colors">
+          <span class="text-green-400">🔊 SFX On</span>
+        </button>
+
+        <button 
+          type="button" 
+          id="toggle-ambient-btn" 
+          onclick="window.toggleAmbientMusic()"
+          class="inline-flex items-center px-3 py-1.5 rounded-lg border border-[var(--doom-border)] bg-[var(--doom-card)] hover:border-amber-500/60 transition-colors">
+          <span class="text-emerald-300/70">🌌 Latveria Ambiance: Muted</span>
+        </button>
+
+        <button 
+          type="button" 
+          id="toggle-spoilers-btn" 
+          onclick="window.toggleSpoilers()"
+          class="inline-flex items-center px-3 py-1.5 rounded-lg border border-[var(--doom-border)] bg-[var(--doom-card)] hover:border-green-500/60 transition-colors">
+          <span class="text-green-400">🛡️ Spoilers: Visible</span>
+        </button>
+
+        <button 
+          type="button" 
+          onclick="window.openBackupModal()"
+          class="inline-flex items-center px-3 py-1.5 rounded-lg border border-[var(--doom-border)] bg-[var(--doom-card)] text-emerald-300/80 hover:border-green-500/60 transition-colors">
+          <span>💾 Backup & Sync</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Real-time Live Countdown to Avengers: Doomsday -->
+    <section class="mb-8">
+      <div class="doom-card rounded-2xl p-5 sm:p-6 border border-green-500/30 text-center relative overflow-hidden bg-gradient-to-b from-emerald-950/40 via-[var(--doom-card)] to-[var(--doom-dark)]">
+        <p class="text-[11px] uppercase tracking-widest text-[var(--doom-muted)] font-semibold mb-3 flex items-center justify-center gap-2">
+          <span>⏳</span> COUNTDOWN TO AVENGERS: DOOMSDAY (DECEMBER 18, 2026)
+        </p>
+
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+          <div class="bg-black/50 border border-[var(--doom-border)] rounded-xl p-2 sm:p-3">
+            <span id="countdown-days" class="block doom-display text-2xl sm:text-4xl font-bold text-green-400 tabular-nums">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-[var(--doom-muted)]">Days</span>
+          </div>
+          <div class="bg-black/50 border border-[var(--doom-border)] rounded-xl p-2 sm:p-3">
+            <span id="countdown-hours" class="block doom-display text-2xl sm:text-4xl font-bold text-green-400 tabular-nums">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-[var(--doom-muted)]">Hours</span>
+          </div>
+          <div class="bg-black/50 border border-[var(--doom-border)] rounded-xl p-2 sm:p-3">
+            <span id="countdown-mins" class="block doom-display text-2xl sm:text-4xl font-bold text-green-400 tabular-nums">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-[var(--doom-muted)]">Minutes</span>
+          </div>
+          <div class="bg-black/50 border border-[var(--doom-border)] rounded-xl p-2 sm:p-3">
+            <span id="countdown-secs" class="block doom-display text-2xl sm:text-4xl font-bold text-green-400 tabular-nums">--</span>
+            <span class="text-[9px] uppercase tracking-wider text-[var(--doom-muted)]">Seconds</span>
+          </div>
+        </div>
+
+        <!-- Live Runtime Stats Bar -->
+        <div class="mt-5 pt-4 border-t border-[var(--doom-border)]">
+          <div class="flex flex-wrap items-center justify-between text-xs text-[var(--doom-muted)] mb-2">
+            <span class="flex items-center gap-1.5 font-medium text-emerald-300">
+              <span>📊 Global Progress:</span>
+              <strong id="stat-watched-count" class="text-white">0 / 45</strong>
+              <span id="stat-percentage" class="text-green-400 font-bold ml-1">(0%)</span>
+            </span>
+            <span id="stat-remaining-time" class="tabular-nums text-amber-400 font-medium">0h 0m left</span>
+          </div>
+
+          <div class="h-2 w-full rounded-full bg-[var(--doom-dark)] border border-[var(--doom-border)] overflow-hidden">
+            <div id="global-progress-fill" class="h-full bg-gradient-to-r from-emerald-600 via-green-500 to-amber-400 transition-all duration-700" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Master Navigation Tabs -->
+    <nav class="mb-8 overflow-x-auto pb-1" aria-label="Main Navigation">
+      <div class="flex items-center gap-1.5 bg-[var(--doom-card)] border border-[var(--doom-border)] p-1.5 rounded-xl min-w-max">
+        <button 
+          type="button" 
+          data-tab="watchlist"
+          onclick="window.switchTab('watchlist')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all bg-green-600 text-white shadow-lg shadow-green-600/30">
+          🎬 Watch Tracker
+        </button>
+
+        <button 
+          type="button" 
+          data-tab="fasttrack"
+          onclick="window.switchTab('fasttrack')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all text-emerald-300/70 hover:text-green-400">
+          ⚡ Fast Track (10)
+        </button>
+
+        <button 
+          type="button" 
+          data-tab="doomsday"
+          onclick="window.switchTab('doomsday')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all text-emerald-300/70 hover:text-green-400">
+          🏛️ Doomsday Dossier
+        </button>
+
+        <button 
+          type="button" 
+          data-tab="characters"
+          onclick="window.switchTab('characters')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all text-emerald-300/70 hover:text-green-400">
+          🦸‍♂️ Multiverse Matrix
+        </button>
+
+        <button 
+          type="button" 
+          data-tab="wall"
+          onclick="window.switchTab('wall')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all text-emerald-300/70 hover:text-green-400">
+          🎟️ Stub Wall
+        </button>
+
+        <button 
+          type="button" 
+          data-tab="badges"
+          onclick="window.switchTab('badges')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all text-emerald-300/70 hover:text-green-400">
+          🏆 Badges
+        </button>
+
+        <button 
+          type="button" 
+          data-tab="lore"
+          onclick="window.switchTab('lore')" 
+          class="nav-tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg transition-all text-emerald-300/70 hover:text-green-400">
+          📜 Comic Lore
+        </button>
+      </div>
+    </nav>
+
+    <!-- TAB 1: WATCHLIST TRACKER -->
+    <div id="tab-panel-watchlist" class="tab-content-panel space-y-6">
+      <!-- Search and Controls Bar -->
+      <div class="doom-card rounded-xl p-4 border border-[var(--doom-border)] space-y-3">
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Search Input -->
+          <div class="relative flex-1 min-w-[200px]">
+            <input 
+              type="search" 
+              id="title-search-input"
+              oninput="window.handleSearch(event)"
+              placeholder="Search movies, series, characters, themes..." 
+              class="w-full bg-[var(--doom-dark)] border border-[var(--doom-border)] rounded-lg pl-9 pr-3 py-2 text-xs sm:text-sm text-white placeholder:text-[var(--doom-muted)] focus:border-green-500 outline-none transition-colors"
+            />
+            <svg class="w-4 h-4 text-[var(--doom-muted)] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+
+          <!-- Unwatched Toggle Button -->
+          <button 
+            type="button" 
+            onclick="window.toggleUnwatched()" 
+            class="px-3.5 py-2 rounded-lg border border-[var(--doom-border)] bg-[var(--doom-dark)] text-xs font-medium text-emerald-300 hover:border-green-500/60 flex items-center gap-1.5 transition-colors">
+            <span>👁️</span> Unwatched Only
+          </button>
+
+          <!-- Sorting Select Dropdown -->
+          <div class="relative min-w-[140px]">
+            <select 
+              id="sorting-select"
+              onchange="window.setSortOrder(this.value)"
+              class="w-full bg-[var(--doom-dark)] border border-[var(--doom-border)] rounded-lg px-3 py-2 text-xs text-emerald-300 focus:border-green-500 outline-none appearance-none cursor-pointer">
+              <option value="release">📅 Release Order</option>
+              <option value="story">📖 Story / Chronological</option>
+              <option value="newest">✨ Newest First</option>
+              <option value="title">🔤 Title A-Z</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Filter Presets Buttons -->
+        <div id="filter-buttons-container" class="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--doom-border)]">
+          <!-- Dynamic Filter Buttons generated by app.js -->
+        </div>
+      </div>
+
+      <!-- Watchlist Items Container -->
+      <div id="watchlist-items-container" class="space-y-3">
+        <!-- Watchlist cards generated by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 2: FAST TRACK (16 Essential Milestones) -->
+    <div id="tab-panel-fasttrack" class="tab-content-panel hidden space-y-6">
+      <div id="fasttrack-items-container">
+        <!-- Generated by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 3: DOOMSDAY DOSSIER -->
+    <div id="tab-panel-doomsday" class="tab-content-panel hidden space-y-6">
+      <div id="doomsday-dossier-container">
+        <!-- Generated by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 4: CHARACTERS MATRIX -->
+    <div id="tab-panel-characters" class="tab-content-panel hidden space-y-6">
+      <div id="characters-matrix-container">
+        <!-- Generated by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 5: STUB WALL -->
+    <div id="tab-panel-wall" class="tab-content-panel hidden space-y-6">
+      <div id="stub-wall-container">
+        <!-- Generated by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 6: BADGES -->
+    <div id="tab-panel-badges" class="tab-content-panel hidden space-y-6">
+      <div id="badges-container">
+        <!-- Generated by app.js -->
+      </div>
+    </div>
+
+    <!-- TAB 7: COMIC LORE -->
+    <div id="tab-panel-lore" class="tab-content-panel hidden space-y-6">
+      <div id="comic-lore-container">
+        <!-- Generated by app.js -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 pt-8 border-t border-[var(--doom-border)] text-center text-xs text-[var(--doom-muted)] space-y-2">
+      <p class="font-medium text-emerald-400/80">
+        THE ROAD TO DOOM • Master MCU & Multiverse Preparation Engine
+      </p>
+      <p>
+        Curated for fans preparing for <strong>Avengers: Doomsday</strong> and <strong>Secret Wars</strong>.
+      </p>
+      <div class="pt-2 flex justify-center gap-4 text-[11px]">
+        <button onclick="window.openBackupModal()" class="text-green-400 hover:underline">Export / Backup Data</button>
+        <span>•</span>
+        <button onclick="window.resetAllProgress()" class="text-red-400/80 hover:underline">Reset Watchlist</button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- VIDEO TRAILER MODAL -->
+  <div id="trailer-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="doom-card rounded-2xl border border-green-500/60 w-full max-w-3xl overflow-hidden bg-black shadow-2xl">
+      <div class="flex items-center justify-between p-4 border-b border-[var(--doom-border)] bg-[var(--doom-dark)]">
+        <h4 id="trailer-modal-title" class="font-bold text-sm text-green-300">Marvel Trailer</h4>
+        <button onclick="window.closeTrailerModal()" class="text-[var(--doom-muted)] hover:text-white p-1 rounded-lg">
+          ✕
+        </button>
+      </div>
+      <div class="aspect-video w-full">
+        <iframe id="trailer-iframe" src="" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUB EDITOR MODAL -->
+  <div id="stub-editor-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="stub-editor-content" class="w-full">
+      <!-- Injected by app.js -->
+    </div>
+  </div>
+
+  <!-- BACKUP & RESTORE MODAL -->
+  <div id="backup-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="doom-card rounded-2xl p-6 border border-green-500/50 max-w-lg w-full bg-[var(--doom-bg)]">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="doom-display text-xl font-bold text-green-400">Backup & Restore Progress</h3>
+        <button onclick="window.closeBackupModal()" class="text-[var(--doom-muted)] hover:text-white">✕</button>
+      </div>
+      <p class="text-xs text-[var(--doom-muted)] mb-4">Copy your progress JSON string to save it anywhere or paste previous backup to restore your watchlist and ratings.</p>
+
+      <textarea id="backup-json-textarea" rows="8" class="w-full font-mono text-[11px] bg-[var(--doom-card)] border border-[var(--doom-border)] rounded-lg p-3 text-emerald-300 focus:border-green-500 outline-none mb-4"></textarea>
+
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <button onclick="window.copyBackupJson()" class="px-4 py-2 bg-[var(--doom-dark)] border border-green-600/50 hover:border-green-400 text-xs font-semibold rounded-lg text-emerald-300">
+          📋 Copy to Clipboard
+        </button>
+        <div class="flex gap-2">
+          <button onclick="window.closeBackupModal()" class="px-4 py-2 text-xs text-[var(--doom-muted)] hover:text-white">Cancel</button>
+          <button onclick="window.restoreBackupJson()" class="px-5 py-2 bg-green-600 hover:bg-green-500 text-xs font-bold text-white rounded-lg">Restore Backup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
